@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <title>seleccion</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    </head>
+    <body>
+		<header style="background-color: #2980B9;
+		color: white;
+		padding: 10px;
+		text-align: center;">
+			<h1>Seleccion de Personajes</h1>
+		</header>
+		<nav class="navbar navbar-expand-lg ">
+			<div class="container-fluid">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav" id="menu">
+					</div>
+				</div>
+			</div>
+		</nav>
+        <script>
+            const xhr=new XMLHttpRequest();
+			xhr.open("GET", "selecion.json", true);
+			xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const menuitems = JSON.parse(xhr.responseText);
+                    let menuHTML="";
+
+                    menuitems.forEach(item => {
+                        menuHTML+=`
+                            <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="${item.link}">${item.nombre}</a>
+                            </li>
+                            `;
+                    }); 
+
+                    document.getElementById("menu").innerHTML=menuHTML;
+                }
+                else {
+                    console.error("Error");
+                }
+            };
+            xhr.send();
+        </script>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img src="guerrero.jpg" class="card-img-top" alt="Guerrero">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Guerrero</h5>
+                    <button class="btn btn-primary" onclick="seleccionarPersonaje('Guerrero')">Seleccionar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img src="Mago.jpg" class="card-img-top" alt="Mago">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Mago</h5>
+                    <button class="btn btn-primary" onclick="seleccionarPersonaje('Mago')">Seleccionar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img src="Arquero.jpg" class="card-img-top" alt="Arquero">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Arquero</h5>
+                    <button class="btn btn-primary" onclick="seleccionarPersonaje('Arquero')">Seleccionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalSeleccion" tabindex="-1" aria-labelledby="modalSeleccionLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalSeleccionLabel">¡Personaje Seleccionado!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Has seleccionado el personaje: <span id="personajeSeleccionado"></span>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybIzV7hy19bX3iA2KzDoZm0pE0x9g6hvGh8f5DF7Rk6wZn9G8" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0lJdBtKJf0OGpNdjeCdeuSxWpFSq/SKMzL5Xa/J2W8bFflfR" crossorigin="anonymous"></script>
+<script>
+    function seleccionarPersonaje(personaje) {
+        document.getElementById('personajeSeleccionado').textContent = personaje;
+        var modal = new bootstrap.Modal(document.getElementById('modalSeleccion'));
+        modal.show();
+    }
+</script>
+
+</body>
+</html>

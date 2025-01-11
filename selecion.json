@@ -1,0 +1,18 @@
+[
+    {
+        "nombre": "Elección de personajes y sus habilidades",
+        "link": "elección1.html"
+    },
+    {
+        "nombre": "Descripción de cada personaje  ",
+        "link": "descripción2.html"
+    },
+    {
+        "nombre": "Opciones de personalización ",
+        "link": "opciones3.html"
+    },
+    {
+        "nombre": "Confirmación de elección",
+        "link": "confirmación4.html"
+    }
+]

@@ -1,0 +1,150 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalización del Juego - Elige tu Aventura</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .btn-language {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="text-center">
+        <h1 id="title">Bienvenido a Elige tu Aventura</h1>
+        <div class="btn-language">
+            <button class="btn btn-primary" onclick="changeLanguage('es')">Español</button>
+            <button class="btn btn-info" onclick="changeLanguage('en')">English</button>
+        </div>
+    </div>
+
+    <!-- Formulario de personalización -->
+    <div id="customization-form" class="mt-5">
+        <h2 id="customization-title">Personaliza tu personaje</h2>
+        <form>
+            <!-- Nombre del jugador -->
+            <div class="form-group">
+                <label for="player-name" id="label-name">Nombre del Jugador</label>
+                <input type="text" class="form-control" id="player-name" placeholder="Ingresa tu nombre">
+            </div>
+
+            <!-- Selección de personaje -->
+            <div class="form-group">
+                <label for="character-select" id="label-character">Selecciona un Personaje</label>
+                <select class="form-control" id="character-select">
+                    <option value="warrior" id="option-warrior">Guerrero</option>
+                    <option value="mage" id="option-mage">Mago</option>
+                    <option value="archer" id="option-archer">Arquero</option>
+                </select>
+            </div>
+
+            <!-- Botón de Guardar -->
+            <button type="submit" class="btn btn-success" id="save-btn">Guardar</button>
+        </form>
+    </div>
+
+    <!-- Información del personaje seleccionado -->
+    <div id="character-info" class="mt-4">
+        <ul id="character-skills"></ul>
+    </div>
+</div>
+
+<script>
+    // Datos de traducción
+    const translations = {
+        es: {
+            title: "Bienvenido a Elige tu Aventura",
+            intro: "Personaliza tu experiencia de juego eligiendo un nombre, personaje y más.",
+            customizationTitle: "Personaliza tu personaje",
+            labelName: "Nombre del Jugador",
+            optionWarrior: "Guerrero",
+            optionMage: "Mago",
+            optionArcher: "Arquero",
+            saveBtn: "Guardar",
+            warriorSkills: ["Fuerza mejorada", "Resistencia alta", "Golpe devastador"],
+            mageSkills: ["Hechizos de fuego", "Escudo mágico", "Teletransportación"],
+            archerSkills: ["Disparo rápido", "Esquiva ágil", "Tiro certero"]
+        },
+        en: {
+            title: "Welcome to Choose Your Adventure",
+            intro: "Customize your game experience by choosing a name, character, and more.",
+            customizationTitle: "Customize your character",
+            labelName: "Player Name",
+            labelCharacter: "Choose a Character",
+            optionWarrior: "Warrior",
+            optionMage: "Mage",
+            optionArcher: "Archer",
+            saveBtn: "Save",
+            warriorSkills: ["Enhanced Strength", "High Endurance", "Devastating Blow"],
+            mageSkills: ["Fire Spells", "Magic Shield", "Teleportation"],
+            archerSkills: ["Rapid Shot", "Agile Dodge", "Precise Shot"]
+        }
+    };
+
+    // Función para cambiar el idioma
+    function changeLanguage(language) {
+        document.getElementById("title").innerText = translations[language].title;
+        document.getElementById("intro").innerText = translations[language].intro;
+        document.getElementById("customization-title").innerText = translations[language].customizationTitle;
+        document.getElementById("label-name").innerText = translations[language].labelName;
+        document.getElementById("label-character").innerText = translations[language].labelCharacter;
+        document.getElementById("option-warrior").innerText = translations[language].optionWarrior;
+        document.getElementById("option-mage").innerText = translations[language].optionMage;
+        document.getElementById("option-archer").innerText = translations[language].optionArcher;
+        document.getElementById("save-btn").innerText = translations[language].saveBtn;
+    }
+
+    // Función para seleccionar un personaje y mostrar sus habilidades
+    function showCharacterSkills(character) {
+        let skills = [];
+        if (character === 'warrior') {
+            skills = translations[language].warriorSkills;
+        } else if (character === 'mage') {
+            skills = translations[language].mageSkills;
+        } else if (character === 'archer') {
+            skills = translations[language].archerSkills;
+        }
+
+        const skillList = document.getElementById("character-skills");
+        skillList.innerHTML = ""; // Limpiar habilidades previas
+        skills.forEach(skill => {
+            const li = document.createElement("li");
+            li.textContent = skill;
+            skillList.appendChild(li);
+        });
+    }
+
+    // Evento de cambio de personaje
+    document.getElementById("character-select").addEventListener("change", function() {
+        showCharacterSkills(this.value);
+    });
+
+    // Inicializar idioma en español por defecto
+    let language = 'es';
+    changeLanguage(language);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

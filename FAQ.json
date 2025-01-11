@@ -1,0 +1,18 @@
+[
+    {
+        "nombre": "Modificar elección de personaje",
+        "link": "modificar1.html"
+    },
+    {
+        "nombre": "Cómo guardar progreso ",
+        "link": "com2.html"
+    },
+    {
+        "nombre": "Recomendaciones para avanzar en el juego ",
+        "link": "re3.html"
+    },
+    {
+        "nombre": "Contactar soporte",
+        "link": "cont4.html"
+    }
+]

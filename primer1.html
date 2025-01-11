@@ -1,0 +1,83 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primer Escenario</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #2980B9;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .btn-option {
+            margin-top: 10px;
+            width: 100%;
+        }
+    </style>
+<div class="container text-center">
+    <h1 id="title">Elige tu Aventura</h1>
+    <div class="card">
+        <div class="card-body">
+            <h2 id="scenario-title">El Bosque Misterioso</h2>
+            <p id="scenario-description">Te encuentras en un oscuro y misterioso bosque. Las sombras se mueven entre los árboles, y un sonido lejano te pone los pelos de punta. Tienes tres opciones:</p>
+
+            <!-- Botones de opciones -->
+            <button class="btn btn-primary btn-option" onclick="chooseOption('explore')">Explorar el bosque</button>
+            <button class="btn btn-warning btn-option" onclick="chooseOption('stay')">Quedarte quieto y esperar</button>
+            <button class="btn btn-danger btn-option" onclick="chooseOption('run')">Correr hacia la salida</button>
+        </div>
+    </div>
+
+    <!-- Área de Resultados -->
+    <div id="result" class="mt-4" style="display: none;">
+        <h3 id="result-title"></h3>
+        <p id="result-description"></p>
+        <button class="btn btn-success" onclick="restartScenario()">Volver a intentar</button>
+    </div>
+</div>
+
+<script>
+    // Función para manejar la elección del jugador
+    function chooseOption(option) {
+        // Ocultar las opciones y mostrar el resultado
+        document.querySelector('.card').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
+
+        // Mostrar el resultado basado en la opción elegida
+        if (option === 'explore') {
+            document.getElementById('result-title').innerText = 'Explorar el Bosque';
+            document.getElementById('result-description').innerText = 'Decides explorar el bosque, pero algo te observa desde las sombras... un lobo aparece frente a ti.';
+        } else if (option === 'stay') {
+            document.getElementById('result-title').innerText = 'Esperar en el Bosque';
+            document.getElementById('result-description').innerText = 'Decides quedarte quieto y esperar. Un zorro aparece, pero no parece ser peligroso. Sin embargo, el silencio te agobia.';
+        } else if (option === 'run') {
+            document.getElementById('result-title').innerText = 'Correr hacia la salida';
+            document.getElementById('result-description').innerText = 'Decides correr hacia la salida del bosque. Afortunadamente, logras encontrar el camino de vuelta a casa sano y salvo.';
+        }
+    }
+
+    // Función para reiniciar el escenario
+    function restartScenario() {
+        // Mostrar las opciones nuevamente
+        document.querySelector('.card').style.display = 'block';
+        document.getElementById('result').style.display = 'none';
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

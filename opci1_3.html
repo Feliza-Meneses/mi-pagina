@@ -1,0 +1,65 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecciona tu Dificultad</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+	
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .result {
+            margin-top: 30px;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .btn {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="contenido">
+        <h2>Elige la dificultad de tu aventura</h2>
+        <p>
+            Selecciona un nivel de dificultad para comenzar tu juego de aventura. 
+            ¡Tu elección determinará el desafío que enfrentarás!
+        </p>
+
+        <div class="list-group">
+            <button class="list-group-item list-group-item-action" onclick="setDifficulty('facil')">Fácil</button>
+            <button class="list-group-item list-group-item-action" onclick="setDifficulty('medio')">Medio</button>
+            <button class="list-group-item list-group-item-action" onclick="setDifficulty('dificil')">Difícil</button>
+        </div>
+
+        <div class="result" id="result"></div>
+    </div>
+    <div class="container mt-5" id="conclusion">
+        <h3>Conclusión</h3>
+        <p>
+            En los juegos de aventura, la dificultad es clave para crear una experiencia única. 
+            Ya sea que prefieras un desafío más relajado o algo extremadamente complicado, tu elección define el rumbo de tu aventura.
+        </p>
+    </div>
+    <script>
+        function setDifficulty(difficulty) {
+            let resultText = document.getElementById('result');
+            
+            if (difficulty === 'facil') {
+                resultText.innerHTML = "<strong>¡Nivel Fácil seleccionado!</strong> En este nivel, los enemigos son más débiles, los recursos son abundantes y el tiempo para completar la misión es largo. Relájate y disfruta de la aventura.";
+                resultText.style.color = "green";
+            } else if (difficulty === 'medio') {
+                resultText.innerHTML = "<strong>¡Nivel Medio seleccionado!</strong> En este nivel, los enemigos son más desafiantes, los recursos están equilibrados y deberás tomar decisiones rápidas. ¿Estás listo para el reto?";
+                resultText.style.color = "orange";
+            } else if (difficulty === 'dificil') {
+                resultText.innerHTML = "<strong>¡Nivel Difícil seleccionado!</strong> En este nivel, los enemigos son fuertes, los recursos son limitados y el tiempo es corto. Solo los más valientes se atreverán a enfrentar este reto. ¡Buena suerte!";
+                resultText.style.color = "red";
+            }
+        }
+    </script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

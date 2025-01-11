@@ -1,0 +1,115 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Elección - Elige tu Aventura</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #D6EAF8 ;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn-language {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<div class="container text-center">
+    <h1 id="title">¡Elige tu Aventura!</h1>
+    <p id="intro">Selecciona un personaje y confirma tu elección.</p>
+    <div class="btn-language">
+        <button class="btn btn-primary" onclick="changeLanguage('es')">Español</button>
+        <button class="btn btn-info" onclick="changeLanguage('en')">English</button>
+    </div>
+    <div id="character-selection">
+        <h2 id="choose-character-title">Selecciona un personaje</h2>
+        <select class="form-control" id="character-select">
+            <option value="warrior" id="option-warrior">Guerrero</option>
+            <option value="mage" id="option-mage">Mago</option>
+            <option value="archer" id="option-archer">Arquero</option>
+        </select>
+        <button class="btn btn-success mt-3" id="confirm-btn" onclick="confirmChoice()">
+            Confirmar Elección
+        </button>
+    </div>
+    <div id="confirmation-message" class="mt-4" style="display: none;">
+        <h3 id="confirmation-title">¡Confirmación Exitosa!</h3>
+        <p id="confirmation-text">Has seleccionado el personaje: <strong id="chosen-character"></strong></p>
+        <button class="btn btn-primary" onclick="resetSelection()">Cambiar Elección</button>
+    </div>
+</div>
+<script>
+    const translations = {
+        es: {
+            title: "¡Elige tu Aventura!",
+            intro: "Selecciona un personaje y confirma tu elección.",
+            chooseCharacterTitle: "Selecciona un personaje",
+            optionWarrior: "Guerrero",
+            optionMage: "Mago",
+            optionArcher: "Arquero",
+            confirmBtn: "Confirmar Elección",
+            confirmationTitle: "¡Confirmación Exitosa!",
+            confirmationText: "Has seleccionado el personaje: ",
+            resetBtn: "Cambiar Elección"
+        },
+        en: {
+            title: "Choose Your Adventure!",
+            intro: "Select a character and confirm your choice.",
+            chooseCharacterTitle: "Choose a character",
+            optionWarrior: "Warrior",
+            optionMage: "Mage",
+            optionArcher: "Archer",
+            confirmBtn: "Confirm Choice",
+            confirmationTitle: "Confirmation Successful!",
+            confirmationText: "You have selected the character: ",
+            resetBtn: "Change Choice"
+        }
+    };
+
+    let language = 'es'; // Idioma por defecto: Español
+
+    // Función para cambiar el idioma
+    function changeLanguage(languageCode) {
+        language = languageCode;
+        document.getElementById("title").innerText = translations[language].title;
+        document.getElementById("intro").innerText = translations[language].intro;
+        document.getElementById("choose-character-title").innerText = translations[language].chooseCharacterTitle;
+        document.getElementById("option-warrior").innerText = translations[language].optionWarrior;
+        document.getElementById("option-mage").innerText = translations[language].optionMage;
+        document.getElementById("option-archer").innerText = translations[language].optionArcher;
+        document.getElementById("confirm-btn").innerText = translations[language].confirmBtn;
+        document.getElementById("confirmation-title").innerText = translations[language].confirmationTitle;
+        document.getElementById("confirmation-text").innerText = translations[language].confirmationText;
+        document.getElementById("reset-btn").innerText = translations[language].resetBtn;
+    }
+
+    // Función para confirmar la elección del personaje
+    function confirmChoice() {
+        const character = document.getElementById("character-select").value;
+        const characterName = document.getElementById("character-select").options[document.getElementById("character-select").selectedIndex].text;
+
+        // Mostrar mensaje de confirmación
+        document.getElementById("chosen-character").innerText = characterName;
+        document.getElementById("confirmation-message").style.display = "block";
+        document.getElementById("character-selection").style.display = "none";
+    }
+
+    // Función para resetear la selección y volver al formulario de elección
+    function resetSelection() {
+        document.getElementById("confirmation-message").style.display = "none";
+        document.getElementById("character-selection").style.display = "block";
+    }
+
+    // Inicializar idioma en español por defecto
+    changeLanguage(language);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

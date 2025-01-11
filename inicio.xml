@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+    <item>
+        <nombre>Inicio</nombre>
+        <link>inicio.html</link>
+    </item>
+    <item>
+        <nombre>Seleccion  de Personajes</nombre>
+        <link>SelecciondePersonajes.html</link>
+    </item>
+    <item>
+        <nombre>Desarrollo de Juego</nombre>
+        <link>DesarrollodeJuego.html</link>
+    </item>
+    <item>
+        <nombre>Finales</nombre>
+        <link>Finales.html</link>
+    </item>
+	<item>
+        <nombre>Comunidad</nombre>
+        <link>Comunidad.html</link>
+    </item>
+    <item>
+        <nombre>Extras</nombre>
+        <link>Extras.html</link>
+    </item>
+    <item>
+        <nombre>FAQ</nombre>
+        <link>FAQ.html</link>
+    </item>
+    <item>
+        <nombre>Contacto</nombre>
+        <link>Contacto.html</link>
+    </item>
+</menu>

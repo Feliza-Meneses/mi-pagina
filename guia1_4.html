@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elige Tu Aventura</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #D6EAF8;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .text-center {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1>¡Elige Tu Aventura!</h1>
+            <p>Haz clic en una de las opciones para avanzar en la historia.</p>
+        </div>
+
+        <div id="game-story">
+            <p>Estás en un bosque oscuro. Tienes dos caminos por delante. ¿Qué vas a hacer?</p>
+            <button class="btn btn-primary" onclick="choosePath('left')">Tomar el camino de la izquierda</button>
+            <button class="btn btn-secondary" onclick="choosePath('right')">Tomar el camino de la derecha</button>
+        </div>
+
+        <div id="game-result" class="result"></div>
+    </div>
+
+    <script>
+        function choosePath(choice) {
+            var storyText = "";
+            var nextChoices = "";
+
+            if (choice === 'left') {
+                storyText = "Has tomado el camino de la izquierda y te encuentras con un río.";
+                nextChoices = `
+                    <button class="btn btn-success" onclick="choosePath('cross')">Cruzar el río</button>
+                    <button class="btn btn-danger" onclick="choosePath('stay')">Quedarte junto al río</button>
+                `;
+            } else if (choice === 'right') {
+                storyText = "Has tomado el camino de la derecha y encuentras una cueva oscura.";
+                nextChoices = `
+                    <button class="btn btn-warning" onclick="choosePath('enter')">Entrar en la cueva</button>
+                    <button class="btn btn-info" onclick="choosePath('leave')">Volver atrás</button>
+                `;
+            } else if (choice === 'cross') {
+                storyText = "Has cruzado el río y encontraste un tesoro escondido.";
+                nextChoices = `
+                    <button class="btn btn-primary" onclick="choosePath('celebrate')">Celebrar el hallazgo</button>
+                `;
+            } else if (choice === 'stay') {
+                storyText = "Te quedas junto al río y te relajas. Un animal aparece.";
+                nextChoices = `
+                    <button class="btn btn-success" onclick="choosePath('befriend')">Tratar de hacer amistad</button>
+                    <button class="btn btn-danger" onclick="choosePath('fight')">Luchar contra el animal</button>
+                `;
+            } else if (choice === 'enter') {
+                storyText = "Entraste en la cueva y encuentras un monstruo.";
+                nextChoices = `
+                    <button class="btn btn-warning" onclick="choosePath('fight')">Luchar con el monstruo</button>
+                    <button class="btn btn-danger" onclick="choosePath('run')">Huir</button>
+                `;
+            } else if (choice === 'leave') {
+                storyText = "Decidiste irte, pero te perdiste en el bosque.";
+                nextChoices = `
+                    <button class="btn btn-success" onclick="choosePath('findPath')">Buscar una salida</button>
+                `;
+            } else if (choice === 'celebrate') {
+                storyText = "¡Has ganado! Celebraste el hallazgo del tesoro.";
+                nextChoices = "";
+            } else if (choice === 'befriend') {
+                storyText = "Hiciste amistad con el animal, y te acompaña en tu aventura.";
+                nextChoices = "";
+            } else if (choice === 'fight') {
+                storyText = "Luchaste valientemente y ganaste.";
+                nextChoices = "";
+            } else if (choice === 'run') {
+                storyText = "Escapaste a tiempo del monstruo.";
+                nextChoices = "";
+            } else if (choice === 'findPath') {
+                storyText = "Encontraste un camino que te lleva fuera del bosque.";
+                nextChoices = "";
+            }
+            document.getElementById("game-story").innerHTML = storyText;
+            document.getElementById("game-result").innerHTML = nextChoices;
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

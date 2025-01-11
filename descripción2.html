@@ -1,0 +1,148 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elige Tu Aventura - Descripción de Personajes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .btn-language {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="text-center">
+        <h1 id="title">¡Elige Tu Personaje!</h1>
+        <p id="intro">Selecciona un personaje para ver su descripción y habilidades.</p>
+        <div class="btn-language">
+            <button class="btn btn-primary" onclick="changeLanguage('es')">Español</button>
+            <button class="btn btn-info" onclick="changeLanguage('en')">English</button>
+        </div>
+    </div>
+    <div id="character-selection" class="row">
+        <div class="col-md-4">
+            <div class="card" onclick="selectCharacter('warrior')">
+                <img class="card-img-top" src="Guerrero.jpg" alt="Guerrero">
+                <div class="card-body">
+                    <h5 class="card-title" id="warrior-name">Guerrero</h5>
+                    <p class="card-text" id="warrior-description">Fuerte y valiente, ideal para el combate cuerpo a cuerpo.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" onclick="selectCharacter('mage')">
+                <img class="card-img-top" src="Mago.jpg" alt="Mago">
+                <div class="card-body">
+                    <h5 class="card-title" id="mage-name">Mago</h5>
+                    <p class="card-text" id="mage-description">Usa magia poderosa para atacar a larga distancia.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Arquero -->
+        <div class="col-md-4">
+            <div class="card" onclick="selectCharacter('archer')">
+                <img class="card-img-top" src="Arquero.jpg" alt="Arquero">
+                <div class="card-body">
+                    <h5 class="card-title" id="archer-name">Arquero</h5>
+                    <p class="card-text" id="archer-description">Experto en el uso del arco, ideal para ataques rápidos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const translations = {
+        es: {
+            title: "¡Elige Tu Personaje!",
+            intro: "Selecciona un personaje para ver su descripción.",
+            warriorName: "Guerrero",
+            warriorDescription: "Fuerte y valiente, ideal para el combate cuerpo a cuerpo.",
+            mageName: "Mago",
+            mageDescription: "Usa magia poderosa para atacar a larga distancia.",
+            archerName: "Arquero",
+            archerDescription: "Experto en el uso del arco, ideal para ataques rápidos.",
+            warriorSkills: ["Fuerza mejorada", "Resistencia alta", "Golpe devastador"],
+            mageSkills: ["Hechizos de fuego", "Escudo mágico", "Teletransportación"],
+            archerSkills: ["Disparo rápido", "Esquiva ágil", "Tiro certero"]
+        },
+        en: {
+            title: "Choose Your Character!",
+            intro: "Select a character to view their description and skills.",
+            warriorName: "Warrior",
+            warriorDescription: "Strong and brave, ideal for close combat.",
+            mageName: "Mage",
+            mageDescription: "Uses powerful magic for long-range attacks.",
+            archerName: "Archer",
+            archerDescription: "Expert with the bow, ideal for fast attacks.",
+            warriorSkills: ["Enhanced Strength", "High Endurance", "Devastating Blow"],
+            mageSkills: ["Fire Spells", "Magic Shield", "Teleportation"],
+            archerSkills: ["Rapid Shot", "Agile Dodge", "Precise Shot"]
+        }
+    };
+    function changeLanguage(language) {
+        document.getElementById("title").innerText = translations[language].title;
+        document.getElementById("intro").innerText = translations[language].intro;
+
+        document.getElementById("warrior-name").innerText = translations[language].warriorName;
+        document.getElementById("warrior-description").innerText = translations[language].warriorDescription;
+        document.getElementById("mage-name").innerText = translations[language].mageName;
+        document.getElementById("mage-description").innerText = translations[language].mageDescription;
+        document.getElementById("archer-name").innerText = translations[language].archerName;
+        document.getElementById("archer-description").innerText = translations[language].archerDescription;
+    }
+    function selectCharacter(character) {
+        let skills = [];
+        let title = "";
+        if (character === 'warrior') {
+            skills = translations[language].warriorSkills;
+            title = translations[language].warriorName;
+        } else if (character === 'mage') {
+            skills = translations[language].mageSkills;
+            title = translations[language].mageName;
+        } else if (character === 'archer') {
+            skills = translations[language].archerSkills;
+            title = translations[language].archerName;
+        }
+        document.getElementById("character-title").innerText = `${title} - Habilidades`;
+        const skillList = document.getElementById("character-skills");
+        skillList.innerHTML = "";
+        skills.forEach(skill => {
+            const li = document.createElement("li");
+            li.textContent = skill;
+            skillList.appendChild(li);
+        });
+    }
+    let language = 'es';
+    changeLanguage(language);
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

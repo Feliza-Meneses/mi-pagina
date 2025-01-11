@@ -1,0 +1,257 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"Juegos de Aventura"</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table th { 
+            background-color: #0E6655 ;
+            color: white;
+        }
+        .badge {
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Juegos de Aventura</h2>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarJuegoModal">
+                Nuevo Juego
+            </button>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="buscarJuego" placeholder="Buscar...">
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="filtroGenero">
+                    <option value="">Todos los géneros</option>
+                    <option value="Fantasía">accion</option>
+                    <option value="Medieval">rompecabezas</option>
+                    <option value="Ciencia Ficción">deporte</option>
+                    <option value="Misterio">Misterio</option>
+                </select>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Género</th>
+                        <th>Dificultad</th>
+                        <th>Duración</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaJuegos">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="agregarJuegoModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Agregar Nuevo Juego</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formularioJuego">
+                        <div class="mb-3">
+                            <label class="form-label">Título</label>
+                            <input type="text" class="form-control" id="tituloJuego">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Género</label>
+                            <select class="form-select" id="generoJuego">
+							<option value="Fantasía">Accion</option>
+                                <option value="Medieval">Rompecabeza</option>
+                                <option value="Ciencia Ficción">Deporte</option>
+                                <option value="Fantasía">Fantasía</option>
+                                <option value="Medieval">Medieval</option>
+                                <option value="Ciencia Ficción">Ciencia Ficción</option>
+                                <option value="Misterio">Misterio</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Dificultad</label>
+                            <select class="form-select" id="dificultadJuego">
+                                <option value="Fácil">Fácil</option>
+                                <option value="Medio">Medio</option>
+                                <option value="Difícil">Difícil</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Duración (minutos)</label>
+                            <input type="number" class="form-control" id="duracionJuego" required min="1">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Estado</label>
+                            <select class="form-select" id="estadoJuego">
+                                <option value="Disponible">Disponible</option>
+                                <option value="No Disponible">No Disponible</option>
+                                <option value="Próximamente">Próximamente</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="agregarJuego()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirmarEliminarModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar este juego?</p>
+                    <p id="juegoAEliminar" class="fw-bold"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="confirmarEliminar()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        let juegos = [
+            {
+                id: 1,
+                titulo: "La Cueva del Dragón",
+                genero: "Fantasía",
+                dificultad: "Difícil",
+                duracion: 45,
+                estado: "Disponible"
+            },
+            {
+                id: 2,
+                titulo: "Castillo Medieval",
+                genero: "Medieval",
+                dificultad: "Medio",
+                duracion: 30,
+                estado: "Disponible"
+            }
+        ];
+        let juegoIdEliminar = null;
+        function mostrarJuegos(juegosAMostrar = juegos) {
+            const tabla = document.getElementById('tablaJuegos');
+            tabla.innerHTML = '';
+
+            juegosAMostrar.forEach(juego => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${juego.titulo}</td>
+                    <td>${juego.genero}</td>
+                    <td>${juego.dificultad}</td>
+                    <td>${juego.duracion} min</td>
+                    <td><span class="badge ${getBadgeClass(juego.estado)}">${juego.estado}</span></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="mostrarModalEliminar(${juego.id})">
+                            Eliminar
+                        </button>
+                    </td>
+                `;
+                tabla.appendChild(fila);
+            });
+        }
+        function getBadgeClass(estado) {
+            switch(estado) {
+                case 'Disponible': return 'bg-success';
+                case 'No Disponible': return 'bg-danger';
+                case 'Próximamente': return 'bg-warning text-dark';
+                default: return 'bg-secondary';
+            }
+        }
+        function agregarJuego() {
+            const nuevoJuego = {
+                id: juegos.length + 1,
+                titulo: document.getElementById('tituloJuego').value,
+                genero: document.getElementById('generoJuego').value,
+                dificultad: document.getElementById('dificultadJuego').value,
+                duracion: parseInt(document.getElementById('duracionJuego').value),
+                estado: document.getElementById('estadoJuego').value
+            };
+
+            juegos.push(nuevoJuego);
+            mostrarJuegos();
+			
+            const modal = bootstrap.Modal.getInstance(document.getElementById('agregarJuegoModal'));
+            modal.hide();
+            document.getElementById('formularioJuego').reset();
+           
+            mostrarAlerta('Juego agregado exitosamente', 'success');
+        }
+
+        function mostrarModalEliminar(id) {
+            const juego = juegos.find(j => j.id === id);
+            if (juego) {
+                juegoIdEliminar = id;
+                document.getElementById('juegoAEliminar').textContent = juego.titulo;
+                const modal = new bootstrap.Modal(document.getElementById('confirmarEliminarModal'));
+                modal.show();
+            }
+        }
+
+        // Función para confirmar eliminación
+        function confirmarEliminar() {
+            if (juegoIdEliminar !== null) {
+                juegos = juegos.filter(juego => juego.id !== juegoIdEliminar);
+                mostrarJuegos();
+                
+                const modal = bootstrap.Modal.getInstance(document.getElementById('confirmarEliminarModal'));
+                modal.hide();
+                
+                mostrarAlerta('Juego eliminado exitosamente', 'danger');
+                juegoIdEliminar = null;
+            }
+        }
+
+        // Función para mostrar alertas
+        function mostrarAlerta(mensaje, tipo) {
+            const alertaDiv = document.createElement('div');
+            alertaDiv.className = `alert alert-${tipo} alert-dismissible fade show`;
+            alertaDiv.innerHTML = `
+                ${mensaje}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.querySelector('.container').insertBefore(alertaDiv, document.querySelector('.d-flex'));
+            setTimeout(() => alertaDiv.remove(), 3000);
+        }
+
+        // Event Listeners para filtros
+        document.getElementById('buscarJuego').addEventListener('input', function(e) {
+            const busqueda = e.target.value.toLowerCase();
+            const juegosFiltrados = juegos.filter(juego => 
+                juego.titulo.toLowerCase().includes(busqueda) ||
+                juego.genero.toLowerCase().includes(busqueda)
+            );
+            mostrarJuegos(juegosFiltrados);
+        });
+
+        document.getElementById('filtroGenero').addEventListener('change', function(e) {
+            const generoSeleccionado = e.target.value;
+            const juegosFiltrados = generoSeleccionado ? 
+                juegos.filter(juego => juego.genero === generoSeleccionado) : 
+                juegos;
+            mostrarJuegos(juegosFiltrados);
+        });
+
+        // Cargar juegos inicialmente
+        mostrarJuegos();
+    </script>
+</body>
+</html>

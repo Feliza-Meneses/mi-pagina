@@ -1,0 +1,18 @@
+[
+    {
+        "nombre": "Diferentes finales según las decisiones",
+        "link": "Diferentes.html"
+    },
+    {
+        "nombre": "Resumen de la aventura elegida ",
+        "link": "Resumen.html"
+    },
+    {
+        "nombre": "Consejos para jugar nuevamente",
+        "link": "Consejos.html"
+    },
+    {
+        "nombre": "Compartir el resultado en redes ",
+        "link": "Compartir.html"
+    }
+]

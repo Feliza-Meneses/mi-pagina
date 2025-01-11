@@ -1,0 +1,18 @@
+[
+    {
+        "nombre": "Introducción al juego y reglas",
+        "link": "intro1_1.html"
+    },
+    {
+        "nombre": "Explicación de la dinámica",
+        "link": "expli1_2.html"
+    },
+    {
+        "nombre": "Opciones de dificultad",
+        "link": "opci1_3.html"
+    },
+    {
+        "nombre": "Guía de cómo jugar",
+        "link": "guia1_4.html"
+    }
+]
